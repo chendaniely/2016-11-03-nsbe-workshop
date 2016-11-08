@@ -1,0 +1,198 @@
+Welcome to Software Carpentry Etherpad!
+
+This pad is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents.
+
+Use of this service is restricted to members of the Software Carpentry and Data Carpentry community; this is not for general purpose use (for that, try etherpad.wikimedia.org).
+
+Users are expected to follow our code of conduct: http://software-carpentry.org/conduct.html
+
+All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
+
+Follow the Python lesson setup instructions at http://swcarpentry.github.io/python-novice-inflammation/setup/
+https://chendaniely.github.io/2016-11-03-nsbe/
+
+Jennifer Shelton: jshelton@nygenome.org
+Look for the Summer Internship Program to post on http://www.nygenome.org
+
+Software Carpentry Lessons:
+    http://software-carpentry.org/lessons/
+
+dib training: http://dib-training.readthedocs.io/en/pub/
+
+datasets:
+
+    UCI: https://archive.ics.uci.edu/ml/datasets.html
+    Kaggle: https://www.kaggle.com/competitions, https://www.kaggle.com/datasets
+    datashader: https://github.com/bokeh/datashader
+
+
+
+final doc: http://www.phdcomics.com/comics/archive.php?comicid=1531
+git image: https://twitter.com/chendaniely/status/653973876226031616
+
+jekyll themes: http://jekyllthemes.org/
+
+
+I. Open your terminal
+
+Mac: Applications -> Utilities -> Terminal
+Windows: start > git bash
+
+#################################
+## Code Challenge 1 - Slicing (subsetting) data
+#################################
+
+        A section of an array is called a slice. We can take slices of character strings as well:
+
+        element = 'oxygen'
+        print(element[0:3])
+        print(element[3:6])
+this code returns:
+
+first three characters: oxy
+last three characters: gen
+
+What is the value of element[:4]? What about element[4:]? Or element[:]?
+
+What is element[-1]? What is element[-2]? Given those answers, explain what element[1:-1] does.
+
+Hints:
+   zero based indexing :  https://www.biostars.org/p/84686/
+
+   http://rosalind.info/problems/locations/
+        tab : autocompletes paths (use this for speed and to avoid mistakes !!)
+At the commandline:
+up/down arrow : moves through previous commands
+CTRL-a : goes to the beginning of a line
+CTRL-e: goes to the end of the line
+To edit with "nano"
+type you message
+control "o" then enter to save
+control "x" to exit
+Type "q" to exit if you are stuck in a "less" log screen
+if you get stuck in "vi" as an editor
+type "i" to switch to edit mode
+type your commit message
+type "ESC" the uppercase "ZZ" to save and exit
+
+#################################
+# Code challenge #2 create your own plot
+#################################
+
+Create a plot showing the standard deviation (numpy.std) of the inflammation data for each day across all patients.
+
+
+#################################
+
+For afternoon:
+
+data: https://www.dropbox.com/sh/xaxpz3pm5r5awes/AADUbGVagF9i4RmM9JkPtviEa?dl=0&preview=Datasaurus_data.csv
+
+#################################
+# Code challenge #3 from 1 to N
+#################################
+
+Python has a built-in function called range that creates a sequence of numbers. Range can accept 1-3 parameters. If one parameter is input, range creates an array of that length, starting at zero and incrementing by 1. If 2 parameters are input, range starts at the first and ends at the second, incrementing by one. If range is passed 3 parameters, it stars at the first one, ends at the second one, and increments by the third one.
+
+For example, range(3) produces the numbers 0, 1, 2, while range(2, 5) produces 2, 3, 4, and range(3, 10, 3) produces 3, 6, 9. Using range, write a loop that uses range to print the first 3 natural numbers:
+
+#################################
+# Code challenge 4 convert a string into a list
+#################################
+
+Use a for-loop to convert the string “hello” into a list of letters:
+
+["h", "e", "l", "l", "o"]
+Hint: You can create an empty list like this: my_list = []
+
+
+Morning Code:
+
+filenames = glob.glob('data/inflammation*.csv')
+for f in filenames:
+    print(f)
+
+    data = numpy.loadtxt(fname=f, delimiter=',')
+
+    fig = matplotlib.pyplot.figure(figsize=(10.0, 3.0))
+
+    axes1 = fig.add_subplot(1, 3, 1)
+    axes2 = fig.add_subplot(1, 3, 2)
+    axes3 = fig.add_subplot(1, 3, 3)
+
+    axes1.set_ylabel('average')
+    axes1.plot(data.mean(axis=0))
+
+    axes2.set_ylabel('max')
+    axes2.plot(data.max(axis=0))
+
+    axes3.set_ylabel('min')
+    axes3.plot(data.min(axis=0))
+
+    fig.tight_layout()
+    matplotlib.pyplot.show(fig)
+
+
+
+    # load data function
+    def load_data(pizza):
+"""Loads a filename into a numpy array
+"""
+    data = np.loadtxt(fname=pizza, delimiter=',')
+    return(data)
+
+
+# plot figure funtion
+def plot_data(data, plot_name):
+"""Takes a numpy array, and a string for a plot
+and returns a matplotlib figure
+"""
+    fig = plt.figure(figsize=(10, 3))
+    plt.title(plot_name)
+
+    axes1 = fig.add_subplot(1, 3, 1)
+    axes2 = fig.add_subplot(1, 3, 2)
+    axes3 = fig.add_subplot(1, 3, 3)
+
+    axes1.set_ylabel('average')
+    axes1.plot(np.mean(data, axis=0))
+
+    axes2.set_ylabel('max')
+    axes2.plot(np.max(data, axis=0))
+
+    axes3.set_ylabel('min')
+    axes3.plot(np.min(data, axis=0))
+
+    fig.tight_layout()
+    plt.show(fig)
+
+
+import seaborn as sns
+anscombe = sns.load_dataset('anscombe')
+anscombe[anscombe['dataset'] =='I']
+
+import numpy as np
+import pandas as pd
+data = pd.read_csv('Datasaurus_data.csv', names = ['x', 'y'])
+data
+np.corrcoef(data['x'], data['y'])  #show
+plt.plot(data['x'], data['y'], 'o') #plot
+
+
+
+
+
+#######################
+#
+# GIT
+#
+#######################
+
+
+final doc: http://www.phdcomics.com/comics/archive.php?comicid=1531
+git image: https://twitter.com/chendaniely/status/653973876226031616
+
+git setup: http://swcarpentry.github.io/git-novice/02-setup/
+$ git config --global user.name "Vlad Dracula"
+$ git config --global user.email "vlad@tran.sylvan.ia"
+$ git config --global color.ui "auto"
